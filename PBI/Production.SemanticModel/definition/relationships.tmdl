@@ -1,0 +1,20 @@
+relationship AutoDetected_1d665b2f-1d38-42df-84e0-eac2df7dfb0b
+	fromColumn: Production.BranchID
+	toColumn: Branch.BranchID
+
+relationship AutoDetected_e08713f3-0b66-4606-94b1-d800d953d1ee
+	fromColumn: Production.MachineID
+	toColumn: Machine.MachineID
+
+relationship AutoDetected_2f8c10c0-f0d3-4b22-a83d-4aafb5afb22d
+	fromColumn: Production.ProductID
+	toColumn: Product.ProductID
+
+relationship AutoDetected_843117fc-88f6-445f-a492-4f7c03aba77c
+	fromColumn: Production.ShiftID
+	toColumn: Shift.ShiftID
+
+relationship 21dcd985-dd34-d773-932f-a088b7c0268a
+	fromColumn: Production.ProductionDate
+	toColumn: Dates.Date
+

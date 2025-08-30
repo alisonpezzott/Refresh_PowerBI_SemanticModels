@@ -1,0 +1,89 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "03287ddc51d9a50750bb",
+  "position": {
+    "x": 912,
+    "y": 16,
+    "z": 3,
+    "height": 112,
+    "width": 336,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Production"
+                        }
+                      },
+                      "Property": "ProductionDate"
+                    }
+                  },
+                  "Function": 4
+                }
+              },
+              "queryRef": "Min(Production.ProductionDate)",
+              "nativeQueryRef": "Latest ProductionDate"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "Production"
+                      }
+                    },
+                    "Property": "ProductionDate"
+                  }
+                },
+                "Function": 4
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f40e0c59c1e0800d93d5",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Production"
+                  }
+                },
+                "Property": "ProductionDate"
+              }
+            },
+            "Function": 4
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

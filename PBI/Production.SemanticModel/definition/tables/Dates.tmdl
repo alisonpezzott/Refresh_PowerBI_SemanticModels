@@ -1,0 +1,76 @@
+table Dates
+	lineageTag: be702a8c-8279-41ee-877a-32aec50375b0
+	dataCategory: Time
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: Short Date
+		lineageTag: 33fccfce-7a11-430c-912c-35808b15466a
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 4c52584e-a4ad-419b-83ff-3525450879ab
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 2f71ffc7-a1be-494d-97f1-b21ea876877f
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: 0eff5c7b-1a03-42c2-a642-46fd5a0b5954
+		summarizeBy: none
+		sourceColumn: MonthName
+		sortByColumn: Month
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthNameShort
+		dataType: string
+		lineageTag: 2e5bcb1c-10e4-4f4e-864f-0fb4e49e777e
+		summarizeBy: none
+		sourceColumn: MonthNameShort
+		sortByColumn: Month
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: 892b7149-acda-495c-8237-bdde23f9ab9d
+		summarizeBy: none
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dates = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("pezzott-mvp.database.windows.net", "ProductionSample"),
+				    dbo_Dates = Source{[Schema="dbo",Item="Dates"]}[Data]
+				in
+				    dbo_Dates
+
+	annotation PBI_ResultType = Table
+

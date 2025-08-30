@@ -1,0 +1,36 @@
+table Shift
+	lineageTag: 697a87b2-a985-44a9-ae30-3d76aaec42d0
+
+	column ShiftID
+		dataType: int64
+		formatString: 0
+		lineageTag: daaf674d-4453-49a0-ab62-d89a570a53d4
+		summarizeBy: none
+		sourceColumn: ShiftID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Shift
+		dataType: string
+		lineageTag: fd1e3e77-d7e6-4c78-8d9e-b287281b7ef4
+		summarizeBy: none
+		sourceColumn: Shift
+		sortByColumn: ShiftID
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Shift = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("pezzott-mvp.database.windows.net", "ProductionSample"),
+				    dbo_Shift = Source{[Schema="dbo",Item="Shift"]}[Data]
+				in
+				    dbo_Shift
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

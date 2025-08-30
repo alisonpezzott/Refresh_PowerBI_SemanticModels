@@ -1,0 +1,31 @@
+table Product
+	lineageTag: aeed1c54-b003-4198-b2a5-d5861e3cb2d6
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		lineageTag: 7938e81f-b46b-452e-b935-0900747f2243
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductGroup
+		dataType: string
+		lineageTag: 9228e024-8ae9-4dd8-938a-0bdff2f5c9a9
+		summarizeBy: none
+		sourceColumn: ProductGroup
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Product = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("pezzott-mvp.database.windows.net", "ProductionSample"),
+				    dbo_Product = Source{[Schema="dbo",Item="Product"]}[Data]
+				in
+				    dbo_Product
+
+	annotation PBI_ResultType = Table
+

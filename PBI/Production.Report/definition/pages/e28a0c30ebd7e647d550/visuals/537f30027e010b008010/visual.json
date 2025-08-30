@@ -1,0 +1,72 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "537f30027e010b008010",
+  "position": {
+    "x": 16,
+    "y": 560,
+    "z": 2,
+    "height": 144,
+    "width": 208,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Shift"
+                    }
+                  },
+                  "Property": "Shift"
+                }
+              },
+              "queryRef": "Shift.Shift",
+              "nativeQueryRef": "Shift",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Basic'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "75d83c92dd600ba36123",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Shift"
+              }
+            },
+            "Property": "Shift"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

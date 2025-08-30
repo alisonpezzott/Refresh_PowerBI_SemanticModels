@@ -1,0 +1,32 @@
+table Machine
+	lineageTag: 3749d8ee-3f04-447f-8558-9738b357e9f8
+
+	column MachineID
+		dataType: int64
+		formatString: 0
+		lineageTag: 88054288-bd2a-4a11-ab3a-d6eed9de495c
+		summarizeBy: none
+		sourceColumn: MachineID
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchID
+		dataType: int64
+		formatString: 0
+		lineageTag: c1f8b4db-506b-4054-bc06-1a00f1c429fb
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Machine = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("pezzott-mvp.database.windows.net", "ProductionSample"),
+				    dbo_Machine = Source{[Schema="dbo",Item="Machine"]}[Data]
+				in
+				    dbo_Machine
+
+	annotation PBI_ResultType = Table
+

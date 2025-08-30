@@ -1,0 +1,31 @@
+table Branch
+	lineageTag: 075847d2-2cd0-47b8-903a-35f764138146
+
+	column BranchID
+		dataType: int64
+		formatString: 0
+		lineageTag: 28dc6736-1bb9-4f40-b795-170002d7946a
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 193ac91c-f4a3-44fd-a519-c2912bec8282
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Branch = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("pezzott-mvp.database.windows.net", "ProductionSample"),
+				    dbo_Branch = Source{[Schema="dbo",Item="Branch"]}[Data]
+				in
+				    dbo_Branch
+
+	annotation PBI_ResultType = Table
+

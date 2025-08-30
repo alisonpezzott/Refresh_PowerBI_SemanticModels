@@ -1,0 +1,89 @@
+table Production
+	lineageTag: 6533be4e-90cf-46f7-b8b0-1502a8787103
+
+	refreshPolicy
+		policyType: basic
+		rollingWindowGranularity: year
+		rollingWindowPeriods: 3
+		incrementalGranularity: month
+		incrementalPeriods: 1
+		sourceExpression =
+			let
+			    Source = Sql.Database("pezzott-mvp.database.windows.net", "ProductionSample"),
+			    dbo_Production = Source{[Schema="dbo",Item="Production"]}[Data],
+			    IncrementalFilters = Table.SelectRows(dbo_Production, each [ProductionDate] >= Date.From(RangeStart) and [ProductionDate] < Date.From(RangeEnd))
+			in
+			    IncrementalFilters
+
+	column ProductionDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 0ec033ae-283f-4966-9fd6-f74e0d7cfc6f
+		summarizeBy: none
+		sourceColumn: ProductionDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		lineageTag: f8cb5e4a-fb8b-4398-ae79-daae0d245cb9
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchID
+		dataType: int64
+		formatString: 0
+		lineageTag: ed1ea659-aea1-40c7-94bf-a6fdbcdb443d
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShiftID
+		dataType: int64
+		formatString: 0
+		lineageTag: b09b6e6e-dd95-4cfb-b99a-9a8e00390176
+		summarizeBy: none
+		sourceColumn: ShiftID
+
+		annotation SummarizationSetBy = Automatic
+
+	column MachineID
+		dataType: int64
+		formatString: 0
+		lineageTag: 2c6d3365-ba5f-4e1e-9b14-f286c21a9790
+		summarizeBy: none
+		sourceColumn: MachineID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Units
+		dataType: int64
+		formatString: 0
+		lineageTag: 5057f36e-1088-4225-9ff6-00465500cfe3
+		summarizeBy: sum
+		sourceColumn: Units
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Production = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("pezzott-mvp.database.windows.net", "ProductionSample"),
+				    dbo_Production = Source{[Schema="dbo",Item="Production"]}[Data],
+				    IncrementalFilters = Table.SelectRows(dbo_Production, each [ProductionDate] >= Date.From(RangeStart) and [ProductionDate] < Date.From(RangeEnd))
+				in
+				    IncrementalFilters
+
+	annotation PBI_IsMQueryFoldable = True
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
